@@ -145,10 +145,11 @@ And the following positional parameters:
 An example cli command is:
 
 ```sh
-thmctrl config create onedark -pt onedark -ps 17 -pf Agave -po 0.95 -ppx 0 -ppy 0 -wn 18 # or
+thmctrl config create onedark -pt onedark -ps 17 -pf Agave -po 0.95 -ppx 0 -ppy 0 -wn 18 -qt onedark # or
+
 thmctrl config create material-ocean --pycritty-theme material-ocean --pycritty-size 12 \
---pycritty-font UbuntuMono --pycritty-opacity 1 --pycritty-padding-x 0 --pycritty-padding-y 0 /
---wallc-wallpaper-name 01 --wallc-wallpaper-extension png
+--pycritty-font UbuntuMono --pycritty-opacity 1 --pycritty-padding-x 0 --pycritty-padding-y 0 \
+--wallc-wallpaper-name 01 --wallc-wallpaper-extension png --qtile-theme material-ocean
 ```
 
 The before commands create two profiles: `onedark` and `material-ocean` with the next config:
