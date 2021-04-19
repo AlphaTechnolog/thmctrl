@@ -1,10 +1,12 @@
 import argparse
 from defs import __version__
+from resources.resources import config_path
 
 
 parser = argparse.ArgumentParser(
     prog='thmctrl',
-    description='Manage my dotfiles config - AlphaTechnology'
+    description='Manage my dotfiles config - AlphaTechnology',
+    epilog=f'Config file path: "{config_path}"'
 )
 
 
@@ -94,6 +96,36 @@ config_subparser_create.add_argument(
 )
 
 
+config_subparser_create.add_argument(
+    '-gtk', '--gtk-theme',
+    required=True, help='The gtk theme'
+)
+
+
+config_subparser_create.add_argument(
+    '--gtk-icon',
+    required=True, help='The gtk icons'
+)
+
+
+config_subparser_create.add_argument(
+    '--gtk-cursor',
+    required=True, help='The gtk cursor'
+)
+
+
+config_subparser_create.add_argument(
+    '-S', '--shell',
+    required=True, help='The shell executable (required in /etc/shells)'
+)
+
+
+config_subparser_create.add_argument(
+    '-Si', '--shell-init',
+    required=False, help='The first shell argument (used to change a shell theme)'
+)
+
+
 profile_parser = subparsers.add_parser('profile', help='Dispatch profile')
 profile_parser.set_defaults(action='profile')
 
@@ -105,7 +137,7 @@ profile_parser.add_argument(
     '-S', '--dispatch',
     required=False, type=str,
     help='The dispatch options',
-    choices=('all', 'pycritty', 'wallc', 'qtile'),
+    choices=('all', 'pycritty', 'wallc', 'qtile', 'gtk', 'shell'),
     default='all'
 )
 

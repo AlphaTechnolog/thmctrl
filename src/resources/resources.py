@@ -70,3 +70,9 @@ class Util:
                     print('  ' * (indent + 1) + Fore.MAGENTA + 'Empty')
             else:
                 print('  ' * (indent + 1) + Fore.GREEN + str(value))
+
+    def syntaxer(self: Callable, content: str) -> str:
+        content = content.replace('=', Fore.YELLOW + '=' + Fore.GREEN)
+        content = content.replace('"', Fore.GREEN + '"')
+        content = content.replace('\n', Fore.RESET + '\n')
+        return content
