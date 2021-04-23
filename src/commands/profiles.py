@@ -1,5 +1,5 @@
 from resources.resources import Util, Resource
-from typing import Callable, Dict, Any
+from typing import Callable, Dict, Any, List
 from cli.log import error
 from colorama import init, Fore
 
@@ -24,6 +24,6 @@ class ProfilesCommand:
 
             self.util.display_list(availables)
 
-    def _get_profiles_list(self: Callable) -> list[str]:
+    def _get_profiles_list(self: Callable) -> List[str]:
         profiles: Dict[str, Any] = self.config_resource.get('profiles')
         return list(profiles.keys())

@@ -5,7 +5,7 @@ from os import getenv
 from os import path
 from os import system as exe
 from typing import Callable, Dict, Any
-from resources.resources import Resource, Util
+from resources.resources import Resource, Util, Meta
 from cli.log import error, info, success, warning
 
 
@@ -15,6 +15,7 @@ qtile_path = path.join(path.expanduser('~'), '.config', 'qtile', 'config.json')
 
 class ProfileCommand:
     config_resource: Resource = Resource()
+    meta_resource: Meta = Meta()
     util: Util = Util()
 
     def __init__(self: Callable, args: Dict[Any, Any]) -> Callable:
@@ -136,20 +137,20 @@ class ProfileCommand:
         gtkrc_3_0 = open(gtkrc_3_0_path, 'w')
 
         gtkrc_3_0_content = re.sub(
-            r'gtk-theme-name = .*',
-            'gtk-theme-name = ' + profile['gtk']['theme'],
+            r'gtk-theme-name=.*',
+            'gtk-theme-name=' + profile['gtk']['theme'],
             gtkrc_3_0_content
         )
 
         gtkrc_3_0_content = re.sub(
-            r'gtk-icon-theme-name = .*',
-            'gtk-icon-theme-name = ' + profile['gtk']['icon'],
+            r'gtk-icon-theme-name=.*',
+            'gtk-icon-theme-name=' + profile['gtk']['icon'],
             gtkrc_3_0_content
         )
 
         gtkrc_3_0_content = re.sub(
-            r'gtk-cursor-theme-name = .*',
-            'gtk-cursor-theme-name = ' + profile['gtk']['cursor'],
+            r'gtk-cursor-theme-name=.*',
+            'gtk-cursor-theme-name=' + profile['gtk']['cursor'],
             gtkrc_3_0_content
         )
 
@@ -213,3 +214,14 @@ class ProfileCommand:
         
         if to_dispatch == 'shell':
             self._dispatch__shell(profile)
+
+        info('Updating meta information...')
+
+        updated: bool = self.meta_resource.write({'used_theme': {
+            'profile': name,
+            'raw_profile': profile
+        }})
+        if updated is False:
+            error('Unexpected error at update the meta information')
+
+        success('Update meta information successfully')

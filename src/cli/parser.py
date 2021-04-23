@@ -151,3 +151,8 @@ profiles_parser.add_argument(
     action='store_true',
     help='List all available profiles'
 )
+
+
+used_parser = subparsers.add_parser('used', help='Show the used theme')
+used_parser.set_defaults(action='used')
+used_parser.add_argument('-C', '--compact', action='store_true')

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ -d /opt/thmctrl ]; then
+if test -d /opt/thmctrl; then
     echo 'Deleting old source code'
     sudo rm -rf /opt/thmctrl
 fi
 
-if [ -f /usr/bin/thmctrl ]; then
+if test -L /usr/bin/thmctrl; then
     echo 'Deleting old symlink'
     sudo rm /usr/bin/thmctrl
 fi
