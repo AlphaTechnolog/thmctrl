@@ -85,7 +85,7 @@ class Util:
             for item in lst:
                 print(Fore.BLUE + '  => ' + Fore.RESET + item)
 
-    def pretty(self: Callable, dct: Dict[Any, Any], indent: int=0):
+    def pretty(self: Callable, dct: Dict[Any, Any], indent: int = 0):
         for key, value in dct.items():
             print('  ' * indent + Fore.BLUE + str(key) + Fore.RESET + ':')
             

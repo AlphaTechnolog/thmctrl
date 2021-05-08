@@ -99,6 +99,63 @@ thmctrl profile $PROFILENAME --dispatch gtk
 thmctrl profile $PROFILENAME --dispatch shell
 ```
 
+### Getting the selected profile information
+
+To get the selected profile information use the flag
+`-G`/`--get` and pass `full` or `compact`, the `compact` mode, only
+show the name of selected profile, but it validate if the selected
+profile exists, and the `full` mode, show all flags of existent profile,
+see this example:
+
+```sh
+thmctrl profile onedark -G compact
+```
+
+```
+=> [  INF  ] Profile name: onedark
+```
+
+```sh
+thmctrl profile onedarks -G compact
+```
+
+```
+=> [  ERR  ] The requested name doesn't exists in config file
+```
+
+```sh
+thmctrl profile onedark -G full
+```
+
+```yaml
+onedark:
+  pycritty:
+    font: Agave
+    opacity: '0.95'
+    padding:
+      x: '0'
+      y: '0'
+    size: '17'
+    theme: onedark
+  qtile:
+    theme: onedark
+  wallc:
+    extension: jpg
+    wallpaper: '18'
+  shell:
+    executable:
+      /usr/bin/fish
+    init:
+      omf theme spacefish
+  gtk:
+    cursor:
+      Breeze
+    icon:
+      Material-Black-Plum-Suru
+    theme:
+      Material-Black-Plum
+```
+
 ### Getting all profiles
 
 To get all created profiles you want to use the command `config` with the flag

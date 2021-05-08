@@ -22,12 +22,29 @@ class ProfileCommand:
         self._args = args
         self._name = self._args['name']
         self._dispatch = self._args['dispatch']
+        self._get = self._args["get"]
+        self._to_get = self._get != "no_get"
+
         self._verificate(self._name)
-        self.dispatch(self._dispatch)
+
+        if not self._to_get:
+            self.dispatch(self._dispatch)
+        else:
+            self.get(self._get)
 
     def _verificate(self: Callable, name: str):
         if not name in self.config_resource.get('profiles'):
             error('The requested name doesn\'t exists in config file')
+
+    def _get__modes(self: Callable):
+        return {
+            "compact": lambda profile: info(f"Profile name: {self._args['name']}"),
+            "full": lambda profile: self.util.pretty(profile)
+        }
+
+    def get(self: Callable, mode: str):
+        profile: Dict[str, Any] = self.config_resource.get("profiles")[self._args["name"]]
+        self._get__modes()[mode](profile)
 
     def _dispatch__pycritty(self: Callable, profile: Dict[str, Any]):
         pycritty_command = ' '.join([
@@ -84,9 +101,9 @@ class ProfileCommand:
                 'name': gtkrc_3_0_path,
                 'initial': '\n'.join([
                     '[Settings]',
-                    'gtk-theme-name = Adwaita',
-                    'gtk-icon-theme-name = Adwaita',
-                    'gtk-cursor-theme-name = Adwaita'
+                    'gtk-theme-name=Adwaita',
+                    'gtk-icon-theme-name=Adwaita',
+                    'gtk-cursor-theme-name=Adwaita'
                 ])
             }
         ]

@@ -142,6 +142,14 @@ profile_parser.add_argument(
 )
 
 
+profile_parser.add_argument(
+    "-G", "--get",
+    choices=("compact", "full",),
+    required=False, default="no_get",
+    help="Get the profile"
+)
+
+
 profiles_parser = subparsers.add_parser('profiles', help='Manage the profiles.')
 profiles_parser.set_defaults(action='profiles')
 
@@ -155,4 +163,7 @@ profiles_parser.add_argument(
 
 used_parser = subparsers.add_parser('used', help='Show the used theme')
 used_parser.set_defaults(action='used')
-used_parser.add_argument('-C', '--compact', action='store_true')
+used_parser.add_argument(
+    '-C', '--compact',
+    action='store_true', help="Show as compact format"
+)
